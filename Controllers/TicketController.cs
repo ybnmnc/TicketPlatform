@@ -32,7 +32,7 @@ namespace TicketPlatform.Controllers
         [Route("getbuslocations")]
         public async Task<IActionResult> GetBusLOcations(dynamic requestBody)
         {
-            BusLocationRequestModel requestModel = BusLocationRequestModel.ConvertBusLocationRequestModel(requestBody, requestContext);
+            BusLocationRequestModel requestModel = BusLocationRequestModel.ConvertBusLocationRequestModel(requestBody.GetRawText(), requestContext);
 
             Dictionary<string, object> responseBody = new Dictionary<string, object>();
 

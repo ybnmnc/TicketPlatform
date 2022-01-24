@@ -8,8 +8,8 @@ namespace TicketPlatform.Utility
     public class RequestConstants
     {
         public const string DATA = "data";
-        public const string SESSION_ID = "sessionId";
-        public const string DEVICE_ID = "deviceId";
+        public const string SESSION_ID = "session-id";
+        public const string DEVICE_ID = "device-id";
         public const string DATE = "date";
         public const string LANGUAGE = "language";
     }

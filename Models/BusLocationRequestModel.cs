@@ -32,18 +32,18 @@ namespace TicketPlatform.Models
             {
                 throw new RequiredException("error.missing.data");
             }
-            if (obj.ContainsKey(RequestConstants.DEVICE_ID))
+            if (!String.IsNullOrEmpty((string)obj.SelectToken("device-session.device-id")))
             {
-                string deviceId = obj[RequestConstants.DATA].ToObject<string>();
+                string deviceId = obj.SelectToken("device-session.device-id").ToObject<string>();
                 model.DeviceId = deviceId;
             }
             else
             {
                 throw new RequiredException("error.missing.deviceId");
             }
-            if (obj.ContainsKey(RequestConstants.SESSION_ID))
+            if (!String.IsNullOrEmpty((string)obj.SelectToken("device-session.session-id")))
             {
-                string sessionId = obj[RequestConstants.SESSION_ID].ToObject<string>();
+                string sessionId = obj.SelectToken("device-session.session-id").ToObject<string>();
                 model.SessionId = sessionId;
             }
             else
