@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TicketPlatform.Core.Middleware;
 using TicketPlatform.Data;
+using TicketPlatform.Services;
+using TicketPlatform.Services.Interface;
 
 namespace TicketPlatform
 {
@@ -27,6 +32,24 @@ namespace TicketPlatform
             services.AddDbContext<BasicContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+            services.AddSession();
+            services.AddMemoryCache();
+            services.AddTransient<IUserService, UserService>();
+            //services.AddScoped<IBusLocationServiceRestClient,BusLocationServiceRestClient>();
+            services.AddHttpClient<IBusLocationServiceRestClient, BusLocationServiceRestClient>();
+            services.AddHttpClient<ISessionServiceRestClient, SessionServiceRestClient>();
+            services.AddMvc();
+
+            #region Authentication
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+          options =>
+          {
+              options.LoginPath = new PathString("/client/getsession");
+              
+          });
+            #endregion
+
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,15 +61,16 @@ namespace TicketPlatform
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseMiddleware<BasicAuthMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -10,6 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using TicketPlatform.Data.Entity;
 using TicketPlatform.Models;
+using TicketPlatform.Services;
+using TicketPlatform.Services.Interface;
+using TicketPlatform.Services.Request_Response;
 using TicketPlatform.Utility;
 
 namespace TicketPlatform.Controllers
@@ -19,14 +22,17 @@ namespace TicketPlatform.Controllers
     [ApiController]
     public class TicketController : AbstractController
     {
-        private readonly Services.BusLocationService busLocationService;
+        private readonly IBusLocationServiceRestClient  _serviceRestClient;
         private readonly IConfiguration configuration;
         private readonly ILogger<TicketController> logger;
         private readonly IRequestContext requestContext;
-        public TicketController(ILogger<TicketController> logger, IConfiguration configuration)
+        public TicketController(ILogger<TicketController> logger,
+            IConfiguration configuration,
+           IBusLocationServiceRestClient   serviceRestClient)
         {
-            logger = logger;
-            configuration = configuration;
+            this.logger = logger;
+            this.configuration = configuration;
+            this._serviceRestClient = serviceRestClient;
         }
         [HttpPost]
         [Route("getbuslocations")]
@@ -36,7 +42,15 @@ namespace TicketPlatform.Controllers
 
             Dictionary<string, object> responseBody = new Dictionary<string, object>();
 
-            var result = busLocationService.GetBusLocation(requestBody, CancellationToken.None);
+            var result = await _serviceRestClient.GetBusLocationAsync(new BusLocationRequest
+            {
+                Data = (string)requestModel.Data,
+                DeviceId = requestModel.DeviceId,
+                SessionId = requestModel.SessionId,
+                Language = requestModel.Language,
+                Date=requestModel.Date.ToString()
+            },
+                CancellationToken.None);
 
             responseBody.Add(ResponseConstants.BUS_LOCATION, result);
 
