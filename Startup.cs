@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using TicketPlatform.Core.Middleware;
 using TicketPlatform.Data;
 using TicketPlatform.Services;
@@ -76,7 +77,8 @@ namespace TicketPlatform
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "api/{controller=location}/{action}/{id}");
+                    pattern: "{controller}/{action}/{id}",
+                 new { controller = "Ticket", action = "Index", id = UrlParameter.Optional });
             });
         }
     }
