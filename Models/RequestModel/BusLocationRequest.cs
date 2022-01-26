@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TicketPlatform.Services.Request_Response
+namespace TicketPlatform.Services.RequestModel
 {
     public class BusLocationRequest
     {

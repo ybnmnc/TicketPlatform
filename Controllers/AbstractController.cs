@@ -8,6 +8,7 @@ using TicketPlatform.Utility;
 
 namespace TicketPlatform.Controllers
 {
+    //Butun classlar ıcın ortak kullanılacak metodları bu sınıfta topluyoruz. Return response ıcın ortak metodların yazılması.
     public class AbstractController : Controller
     {
         public async Task<IActionResult> PrepareResponseAsync(int code, string msgKey, Dictionary<string, object> responseBody)

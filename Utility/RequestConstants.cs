@@ -12,5 +12,6 @@ namespace TicketPlatform.Utility
         public const string DEVICE_ID = "device-id";
         public const string DATE = "date";
         public const string LANGUAGE = "language";
+        public const string TYPE = "type";
     }
 }

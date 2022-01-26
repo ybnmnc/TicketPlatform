@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using TicketPlatform.Exceptions;
 using TicketPlatform.Utility;
 
-namespace TicketPlatform.Models
+namespace TicketPlatform.Models.RequestModel
 {
     public class BusLocationRequestModel
     {
         public object Data { get; set; }
         public string SessionId { get; set; }
         public string DeviceId { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string Language { get; set; }
 
         public static BusLocationRequestModel ConvertBusLocationRequestModel(string requestBody, IRequestContext requestContext)
@@ -49,6 +49,25 @@ namespace TicketPlatform.Models
             else
             {
                 throw new RequiredException("error.missing.sessionId");
+            }
+
+            if (obj.ContainsKey(RequestConstants.LANGUAGE))
+            {
+                string language = obj[RequestConstants.LANGUAGE].ToObject<string>();
+                model.Language = language;
+            }
+            else
+            {
+                throw new RequiredException("error.missing.languageId");
+            }
+            if (obj.ContainsKey(RequestConstants.DATE))
+            {
+                string date = obj[RequestConstants.DATE].ToObject<string>();
+                model.Date = date;
+            }
+            else
+            {
+                throw new RequiredException("error.missing.date");
             }
 
             return model;
