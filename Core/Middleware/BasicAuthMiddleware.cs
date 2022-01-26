@@ -12,6 +12,9 @@ namespace TicketPlatform.Core.Middleware
 {
     public class BasicAuthMiddleware
     {
+        // ara katman kulanılması.request => response arasında handle edılecek ıslemler ıcın yazılmıstır.
+        //Authorzatın ıle => kullanıcı adı ve sıfre kontrolu => yatkı okey ıse response donmesı logıcı.
+
         private readonly RequestDelegate _next;
 
         public BasicAuthMiddleware(RequestDelegate next)

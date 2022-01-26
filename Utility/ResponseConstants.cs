@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TicketPlatform.Utility
 {
+   //response degerlerı ıcın sabıtlerın eklenmesı.
     public static class ResponseConstants
     {
         public const string STATUS = "status";

@@ -16,6 +16,8 @@ namespace TicketPlatform.Models.RequestModel
         public string Date { get; set; }
         public string Language { get; set; }
 
+        //requestbbody den gelen degelerı convert etmek ıcın yazıldı.
+
         public static BusLocationRequestModel ConvertBusLocationRequestModel(string requestBody, IRequestContext requestContext)
         {
             BusLocationRequestModel model = new BusLocationRequestModel();

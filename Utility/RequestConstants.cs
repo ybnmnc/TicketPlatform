@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TicketPlatform.Utility
 {
+    // projede kullanılcak sabıt degerlerın eklenmesı. 
     public class RequestConstants
     {
         public const string DATA = "data";

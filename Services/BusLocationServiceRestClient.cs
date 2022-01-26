@@ -17,6 +17,7 @@ using TicketPlatform.Services.RequestModel;
 
 namespace TicketPlatform.Services
 {
+    //rest apı ıcın sınıf olusturuldu ve ozellıkler eklendı.
     public class BusLocationServiceRestClient : IBusLocationServiceRestClient
     {
         private readonly HttpClient _httpClient;
@@ -43,9 +44,12 @@ namespace TicketPlatform.Services
         }
         public async Task<BusLocations> GetBusLocationAsync(BusLocationRequest busLocationRequest, CancellationToken cancellationToken)
         {
-            //rest mımarısıne gore verı cekme
+            //rest mımarısıne gore verı cekme. post async ıcın verı cekme ıslemı.
+
             var apiPath = $"{baseUrl}/api/location/getbuslocations?Data={busLocationRequest.Data}&session-id={busLocationRequest.SessionId}&device-id={busLocationRequest.DeviceId}&Date={busLocationRequest.Date}&language={busLocationRequest.Language}";
-            var response = new BaseResponse();
+
+            // basıc authorıze ıcın header ın eklenmesı.
+
             var requestHeaderObj = new RequestHeader
             {
                 Authorization = "Basic JEcYcEMyantZV095WVc3G2JtVjNZbWx1="
@@ -53,7 +57,7 @@ namespace TicketPlatform.Services
 
             try
             {
-                using (var result = await _httpClient.PostAsync(apiPath, new StringContent(JsonConvert.SerializeObject(requestHeaderObj), Encoding.UTF8, "application/json"),cancellationToken).ConfigureAwait(false))
+                using (var result = await _httpClient.PostAsync(apiPath, new StringContent(JsonConvert.SerializeObject(requestHeaderObj), Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false))
                 {
                     var readTask = result.Content.ReadAsStringAsync();
                     var mappedOrders = JsonConvert.DeserializeObject<BusLocations>(readTask.Result);
@@ -67,7 +71,7 @@ namespace TicketPlatform.Services
                     return locationResult;
                 }
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 throw new Exception(ex.Message);

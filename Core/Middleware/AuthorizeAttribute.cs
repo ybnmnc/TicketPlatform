@@ -12,9 +12,11 @@ namespace TicketPlatform.Core.Middleware
 {
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
+        //customerauthorıze ıcın kendı sınıfımızı olsuturduk.
+        //.net core kendı customer authorızate sınfları
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            // skip authorization if action is decorated with [AllowAnonymous] attribute
+
             var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
             if (allowAnonymous)
                 return;
@@ -22,11 +24,7 @@ namespace TicketPlatform.Core.Middleware
             var user = (User)context.HttpContext.Items["User"];
             if (user == null)
             {
-                // not logged in - return 401 unauthorized
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
-
-                // set 'WWW-Authenticate' header to trigger login popup in browsers
-                context.HttpContext.Response.Headers["WWW-Authenticate"] = "Basic realm=\"\", charset=\"UTF-8\"";
             }
         }
     }

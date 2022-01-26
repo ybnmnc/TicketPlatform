@@ -9,10 +9,11 @@ namespace TicketPlatform.Data
 {
     public class BasicContext : DbContext
     {
+        //tabloların projeye tanıtılması ve ıslem ıcın aktıf hale getırme.
         public BasicContext(DbContextOptions<BasicContext> options) : base(options)
         { }
 
-        public DbSet<User>Customers { get; set; }
+        public DbSet<User> Customers { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
 

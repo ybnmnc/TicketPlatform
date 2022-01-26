@@ -25,6 +25,7 @@ namespace TicketPlatform.Controllers
         }
 
         //kullanıcı ıcın authentıcate metodu.
+        //her kullanıcının gırıs yapabılmesı ıcın kullanılan ozellık.
         [AllowAnonymous]
         [HttpPost("user/authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticateModel model)

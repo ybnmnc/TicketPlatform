@@ -7,6 +7,7 @@ namespace TicketPlatform.Exceptions
 {
     public class RequiredException : Exception
     {
+        //customer exceptıon ıcın olustuurldu.
         public RequiredException(string msgKey)
         {
 

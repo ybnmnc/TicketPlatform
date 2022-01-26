@@ -26,16 +26,14 @@ namespace TicketPlatform.Services
         new User { Id = 1, Name = "Test1", Password = "test" }
     };
 
+        // user kaydını tuttugumuz verı ıle requestten gelen verı karsılastırması.
         public async Task<User> Authenticate(string username, string password)
         {
-            // wrapped in "await Task.Run" to mimic fetching user from a db
             var user = await Task.Run(() => _users.SingleOrDefault(x => x.Name == username && x.Password == password));
-
-            // on auth fail: null is returned because user is not found
-            // on auth success: user object is returned
             return user;
         }
 
+        //getsessıon ıcın servıs uzerınden rest apı cagrılması.
         public async Task<SessionResponse> GetSession(SessionModel sessionModel)
         {
             var response = await sessionServiceClient.GetSessionInfoAsync(sessionModel, CancellationToken.None);

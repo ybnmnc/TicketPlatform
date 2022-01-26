@@ -15,6 +15,8 @@ namespace TicketPlatform.Models
         public string Version { get; set; }
         public string EquipmentId { get; set; }
 
+        //convertto requestbody to sessıonModel
+
         public static SessionModel ConvertSessionInfoModel(string requestBody)
         {
             SessionModel model = new SessionModel();
