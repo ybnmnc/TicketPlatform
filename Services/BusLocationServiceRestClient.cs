@@ -11,8 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using TicketPlatform.Data.Entity;
 using TicketPlatform.Models;
+using TicketPlatform.Models.RequestModel;
 using TicketPlatform.Services.Interface;
-using TicketPlatform.Services.Request_Response;
+using TicketPlatform.Services.RequestModel;
 
 namespace TicketPlatform.Services
 {

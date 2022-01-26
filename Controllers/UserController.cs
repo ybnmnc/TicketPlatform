@@ -14,15 +14,17 @@ namespace TicketPlatform.Controllers
     [ExcludeFromCodeCoverage]
     [Route("api/")]
     [ApiController]
-    public class UserController :  AbstractController
+    public class UserController : AbstractController
     {
         private readonly IUserService _userService;
 
+        //userservıce ımplemente edılmesı.
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
+        //kullanıcı ıcın authentıcate metodu.
         [AllowAnonymous]
         [HttpPost("user/authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticateModel model)
@@ -35,6 +37,7 @@ namespace TicketPlatform.Controllers
             return Ok(user);
         }
 
+        // apı sessıon metodu.
         [HttpPost("client/getsession")]
         public async Task<IActionResult> Session(dynamic requestBody)
         {

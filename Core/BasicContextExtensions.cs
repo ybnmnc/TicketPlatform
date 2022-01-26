@@ -11,6 +11,7 @@ namespace TicketPlatform.Core
 {
     public static class BasicContextExtensions
     {
+        //confıguratıon ve connectıonStrıng ayarlarının yapılması.
         public static IServiceCollection AddBasicContext(this IServiceCollection collection)
         {
             var configuration = collection.BuildServiceProvider().GetService<IConfiguration>();

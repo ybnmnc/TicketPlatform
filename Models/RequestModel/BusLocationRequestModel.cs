@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TicketPlatform.Exceptions;
 using TicketPlatform.Utility;
 
-namespace TicketPlatform.Models
+namespace TicketPlatform.Models.RequestModel
 {
     public class BusLocationRequestModel
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TicketPlatform.Data.Entity;
-using TicketPlatform.Services.Request_Response;
+using TicketPlatform.Services.RequestModel;
 
 namespace TicketPlatform.Services.Interface
 {

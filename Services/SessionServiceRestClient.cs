@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TicketPlatform.Models;
+using TicketPlatform.Models.RequestModel;
 using TicketPlatform.Services.Interface;
 
 namespace TicketPlatform.Services
